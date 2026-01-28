@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            background: rgb(217, 220, 248);
+            padding: 10px;
+        }
+
+        fieldset{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: #fff;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            padding: 15px;
+        }
+
+        #champ1, #champ2{
+            width: 300px;
+            height: 20px;
+            border: 1px solid gray;
+            padding: 10px;
+        }
+
+        #reponse{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            border-radius: 10px;
+            background: rgb(217, 220, 248);
+        }
+
+        @media screen and (max-width: 768px){
+            input{
+                width: 50px;
+            }
+        }   
+
+
+    </style>
+</head>
+<body>
+    <h1>Ma calculatrice</h1>
+
+    <fieldset>
+        <legend>Ma calculatrice</legend>
+
+        <input id="champ1" type="number" placeholder="Entrez le premier nombre" required>
+
+        <input type="text" id="operations">
+
+        <select id="signe">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value=":">:</option>
+        </select>
+
+        <input id="champ2" type="number" placeholder="Entrez le deuxieme nombre" required>
+
+        <button id="btn">=</button>
+
+    </fieldset>
+
+    <div id="reponse">
+        <p></p>
+    </div>
+
+    <script>
+        let champ1 = document.getElementById('champ1');
+        let champ2 = document.getElementById('champ2');
+        let inputElement = document.getElementById('operations');
+        let select = document.getElementById("signe");
+
+        select.addEventListener('change', (e) => {
+            let valeurselectionne = e.target.value;
+            inputElement.value = valeurselectionne 
+        })
+
+        let reponse = document.getElementById('reponse');
+        let validation = document.querySelector('button');
+
+        validation.addEventListener('click', () => {
+            let val1 = Number(champ1.value);
+            let val2 = Number(champ2.value);
+            let oper = inputElement.value;
+
+            if (isNaN(val1) || isNaN(val2)) {
+                reponse.innerText = "veuillez entrer un nombre valider"
+                return;
+            }
+
+            let resultat;
+
+            switch(oper){
+                case "+": 
+                    resultat = val1 + val2;
+                    break;
+                case "-": 
+                    resultat = val1 - val2;
+                    break;
+                case "x":
+                    resultat = val1 * val2;
+                    break;
+                case ":":
+                    resultat = val1 / val2;
+                    break;
+                default:
+                    resultat = "quelque chose s'est mal passé";
+            }
+
+            reponse.innerText = `le resultat de cette operation est ${resultat}`;
+        })
+        
+    </script>
+</body>
+</html>
