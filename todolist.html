@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Todo Liste</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            height: 100vh;
+            background-color: rgb(217, 220, 248);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #container{
+            background-color: white;
+            padding: 25px;
+            width: 500px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1{
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        input{
+            width: 80%;
+            height: 35px;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid gray;
+            outline: none;
+        }
+
+        button{
+            height: 35px;
+            border-radius: 10px;
+            width: 75px;
+            background-color: #07bfff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add{
+            padding: 0;
+            
+        }
+
+        ul{
+            padding: 10px;
+            
+        }
+
+        li{
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .delete{
+            background-color: crimson;
+        }
+
+        
+    </style>
+</head>
+<body>
+        <div id="container">
+            <h1>Ma Todo Liste</h1>
+            <input type="text" placeholder="Entrez une tache">
+            <button onclick="addTodo()" class="button add">Ajouter</button>
+
+            <ul id="todolist">
+        <!-- la zone concernant l'ajout des taches -->
+            </ul>
+        </div>
+
+
+    
+
+
+    <script>
+        function addTodo() {
+            //selectionner le champ de sais et verifier s'il contient quelque chose;
+
+            const input = document.querySelector('input');
+            let todotext = input.value.trim();
+
+            if(todotext === ""){
+                return;
+            }
+
+            //une fois le preliminaire verifié, on ajoute la tache
+
+            const todolist = document.getElementById('todolist');
+
+            const li = document.createElement('li');
+            li.textContent = todotext;
+
+            //maintenant que la tache est créée, creon le bouton de suppression ainsi que sa fonction
+
+            const deletebutton = document.createElement('button');
+            deletebutton.textContent = "Supprimer";
+            deletebutton.classList.add("button");
+            deletebutton.classList.add("delete");
+            deletebutton.onclick = function() {
+                todolist.removeChild(li);
+            }
+ 
+            //à present on peut assigner les valeurs
+
+            li.appendChild(deletebutton);
+            todolist.appendChild(li);
+
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
